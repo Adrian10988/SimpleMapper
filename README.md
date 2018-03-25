@@ -62,7 +62,7 @@ Now I know what you are thinking.. How do I do more complex mapping? Just implem
 - `[RequireAllProperties]` is class level and will tell SimpleMapper to double check that both mapping classes have the same exact properties. If class A has property 1 but Class B does not have property 1, SimpleMapper will throw an exception.
 
 # Pre Runtime validation
-This is a work in progress. `Validator.ValidateMappings` will take a list of `Assembly` types and will extract all classes that inherit from `BaseMappable` and run pre-runtime checks on them to make sure you can unit test your mappings.
+`Validator.ValidateMappings` will take a list of `Assembly` types and will extract all classes that inherit from `BaseMappable` and run pre-runtime checks on them to make sure you can unit test your mappings. Make sure to create a unit test using this method.
       
 # Important Gotchas!
 - SimpleMapper is only focused on mapping DTOs. As such it only works mapping the following primitives `bool`, `string`, `int`, `long`, `decimal`, `double`. It will ignore reference types. If you need to map nested types, map them separately then aggregate them yourself.
