@@ -13,7 +13,7 @@ namespace SimpleMapper.Rules
             if(config.RejectNullReferences && (from.GetValue(tFrom) is null))
             {
                 throw new NullReferenceException(@"A null property reference was passed into the mapper. If this is not desired behavior please remove 
-any property level attributes entitled [RejectNullReferences]");
+the property level attribute entitled [RejectNullReferences] from ["+tFrom.GetType().Name+ "].["+from.Name+"]");
             }
         }
     }

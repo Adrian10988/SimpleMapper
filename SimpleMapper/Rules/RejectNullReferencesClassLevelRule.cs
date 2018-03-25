@@ -12,7 +12,7 @@ namespace SimpleMapper.Rules
             if (config.RejectNullReferences && (inObject is null))
             {
                 throw new NullReferenceException(@"A null reference was passed into the mapper. If this is not desired behavior please remove 
-any class level attributes entitled [RejectNullReferences]");
+the class level attribute [RejectNullReferences] from [" + from.Name + "]");
             }
         }
     }
