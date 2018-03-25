@@ -56,9 +56,9 @@ Now I know what you are thinking.. How do I do more complex mapping? Just implem
     }  
     
 # Attributes
-- `[ByPass]` is property level and will signal SimpleMapper to skip this property during mapping
+- `[Bypass]` is property level and will signal SimpleMapper to skip this property during mapping
 - `[ImplicitlyConvertPrimitives]` is class level and will tell SimpleMapper to convert between strings and numeric types
-` `[RejectNullReferences]` is class *and* property level. It will tell SimpleMapper to throw `NullReferenceExceptions` should it encounter a null reference at the class or property level.
+- `[RejectNullReferences]` is class *and* property level. It will tell SimpleMapper to throw `NullReferenceExceptions` should it encounter a null reference at the class or property level.
 - `[RequireAllProperties]` is class level and will tell SimpleMapper to double check that both mapping classes have the same exact properties. If class A has property 1 but Class B does not have property 1, SimpleMapper will throw an exception.
 
 # Pre Runtime validation
