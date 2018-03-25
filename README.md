@@ -66,3 +66,4 @@ This is a work in progress. `Validator.ValidateMappings` will take a list of `As
       
 # Important Gotchas!
 - SimpleMapper is only focused on mapping DTOs. As such it only works mapping the following primitives `bool`, `string`, `int`, `long`, `decimal`, `double`. It will ignore reference types. If you need to map nested types, map them separately then aggregate them yourself.
+- SimpleMapper only tries to map what it can by default. This means it will skip over properties that are not present on the destination type. This can be overridden by applying the `[RequireAllProperties]` attribute at the class level.
