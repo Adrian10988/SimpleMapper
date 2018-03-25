@@ -1,2 +1,2 @@
 # SimpleMapper
-Attribute based mapper for C#
+Attribute based mapping for C#
