@@ -1,11 +1,11 @@
-﻿using ShipBob.Mapper.Attributes;
+﻿using SimpleMapper.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.ConvertCopy
+namespace SimpleMapper.Test.Models.ConvertCopy
 {
     [ImplicitlyConvertPrimitives]
     public class FooConvertCopy: BaseMappable<FooConvertCopy, BarConvertCopy>

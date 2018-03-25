@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.ConvertCopy
+namespace SimpleMapper.Test.Models.ConvertCopy
 {
     public class BarConvertCopy
     {

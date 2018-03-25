@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models
+namespace SimpleMapper.Test.Models
 {
     public class FooReference : BaseMappable<FooReference, BarReference>
     {

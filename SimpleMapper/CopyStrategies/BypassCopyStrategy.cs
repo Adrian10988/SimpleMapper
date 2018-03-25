@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using ShipBob.Mapper.Models;
+using SimpleMapper.Models;
 
 namespace SimpleMapper.CopyStrategies
 {

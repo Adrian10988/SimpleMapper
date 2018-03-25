@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ShipBob.Mapper.Models;
+using SimpleMapper.Models;
 
 namespace SimpleMapper.Rules
 {

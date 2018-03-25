@@ -1,4 +1,4 @@
-﻿using ShipBob.Mapper.Models;
+﻿using SimpleMapper.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

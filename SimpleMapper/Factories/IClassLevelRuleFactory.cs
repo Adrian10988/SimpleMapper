@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using ShipBob.Mapper.Models;
-using ShipBob.Mapper.Rules;
+using SimpleMapper.Models;
+using SimpleMapper.Rules;
 
 namespace SimpleMapper.Factories
 {

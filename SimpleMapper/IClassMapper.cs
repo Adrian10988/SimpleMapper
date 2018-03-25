@@ -1,5 +1,5 @@
 ﻿using System;
-using ShipBob.Mapper.Models;
+using SimpleMapper.Models;
 
 namespace SimpleMapper
 {

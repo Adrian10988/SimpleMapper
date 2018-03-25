@@ -1,6 +1,6 @@
-﻿using ShipBob.Mapper.Models;
-using ShipBob.Mapper.Rules;
-using ShipBob.Mapper.Utilities;
+﻿using SimpleMapper.Models;
+using SimpleMapper.Rules;
+using SimpleMapper.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Text;

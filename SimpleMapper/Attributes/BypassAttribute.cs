@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ShipBob.Mapper.Attributes
+namespace SimpleMapper.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class BypassAttribute : Attribute

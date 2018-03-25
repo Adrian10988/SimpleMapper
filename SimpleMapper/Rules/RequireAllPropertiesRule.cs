@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ShipBob.Mapper.Models;
-using ShipBob.Mapper.Utilities;
+using SimpleMapper.Models;
+using SimpleMapper.Utilities;
 
 namespace SimpleMapper.Rules
 {

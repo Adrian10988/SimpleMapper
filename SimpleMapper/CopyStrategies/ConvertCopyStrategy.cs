@@ -1,5 +1,5 @@
-﻿using ShipBob.Mapper.Models;
-using ShipBob.Mapper.Rules;
+﻿using SimpleMapper.Models;
+using SimpleMapper.Rules;
 using System;
 using System.Collections.Generic;
 using System.Linq;

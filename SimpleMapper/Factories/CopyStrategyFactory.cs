@@ -1,6 +1,6 @@
-﻿using ShipBob.Mapper.CopyStrategies;
-using ShipBob.Mapper.Models;
-using ShipBob.Mapper.Rules;
+﻿using SimpleMapper.CopyStrategies;
+using SimpleMapper.Models;
+using SimpleMapper.Rules;
 using System;
 using System.Collections.Generic;
 using System.Text;

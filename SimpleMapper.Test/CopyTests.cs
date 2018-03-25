@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ShipBob.Mapper.Test.Models;
-using ShipBob.Mapper.Test.Models.ConvertCopy;
-using ShipBob.Mapper.Test.Models.DefaultCopy;
+using SimpleMapper.Test.Models;
+using SimpleMapper.Test.Models.ConvertCopy;
+using SimpleMapper.Test.Models.DefaultCopy;
 
-namespace ShipBob.Mapper.Test
+namespace SimpleMapper.Test
 {
     [TestClass]
     public class CopyTests

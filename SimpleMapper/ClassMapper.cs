@@ -1,8 +1,8 @@
-﻿using ShipBob.Mapper.Attributes;
-using ShipBob.Mapper.Factories;
-using ShipBob.Mapper.Models;
-using ShipBob.Mapper.Rules;
-using ShipBob.Mapper.Utilities;
+﻿using SimpleMapper.Attributes;
+using SimpleMapper.Factories;
+using SimpleMapper.Models;
+using SimpleMapper.Rules;
+using SimpleMapper.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

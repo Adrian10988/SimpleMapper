@@ -1,7 +1,7 @@
-﻿using ShipBob.Mapper.Attributes;
-using ShipBob.Mapper.Factories;
-using ShipBob.Mapper.Models;
-using ShipBob.Mapper.Utilities;
+﻿using SimpleMapper.Attributes;
+using SimpleMapper.Factories;
+using SimpleMapper.Models;
+using SimpleMapper.Utilities;
 using System.Linq;
 
 namespace SimpleMapper

@@ -1,5 +1,5 @@
-﻿using ShipBob.Mapper.CopyStrategies;
-using ShipBob.Mapper.Models;
+﻿using SimpleMapper.CopyStrategies;
+using SimpleMapper.Models;
 
 namespace SimpleMapper.Factories
 {
