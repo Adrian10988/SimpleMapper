@@ -67,3 +67,9 @@ Now I know what you are thinking.. How do I do more complex mapping? Just implem
 # Important Gotchas!
 - SimpleMapper is only focused on mapping DTOs. As such it only works mapping the following primitives `bool`, `string`, `int`, `long`, `decimal`, `double`. It will ignore reference types. If you need to map nested types, map them separately then aggregate them yourself.
 - SimpleMapper only tries to map what it can by default. This means it will skip over properties that are not present on the destination type. This can be overridden by applying the `[RequireAllProperties]` attribute at the class level.
+
+
+# Road Map
+- 1.0.1 - More unit test coverage
+- 1.1.0 - `[MapFrom]` attribute will allow mapping properties with different names
+- 1.2.0 - Use of dependency injection within the project
