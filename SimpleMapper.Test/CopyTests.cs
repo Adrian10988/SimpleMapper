@@ -1,0 +1,145 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ShipBob.Mapper.Test.Models;
+using ShipBob.Mapper.Test.Models.ConvertCopy;
+using ShipBob.Mapper.Test.Models.DefaultCopy;
+
+namespace ShipBob.Mapper.Test
+{
+    [TestClass]
+    public class CopyTests
+    {
+
+        [TestMethod]
+        public void DefaultCopy_HappyPath()
+        {
+            var bar = new Bar()
+            {
+                A = "A",
+                B = 1,
+                C = 2.15,
+                D = 3.15M,
+                E = 99999,
+                ShouldBypass = -100,
+                DoesNotExistInFoo = "123123123123"
+            };
+
+            var foo = bar.Map(bar);
+
+            Assert.AreEqual(bar.A, foo.A);
+            Assert.AreEqual(bar.B, foo.B);
+            Assert.AreEqual(bar.C, foo.C);
+            Assert.AreEqual(bar.D, foo.D);
+            Assert.AreEqual(bar.E, foo.E);
+            Assert.AreNotEqual(bar.ShouldBypass, foo.ShouldBypass);
+        }
+
+        [TestMethod]
+        public void ConvertCopy_HappyPath()
+        {
+            var foo = new FooConvertCopy()
+            {
+                StringToBool = "true",
+                StringToDecimal = "12.52",
+                StringToDouble = "12.52",
+                StringToInt = "55",
+                StringToLong = "10000"
+            };
+
+            var bar = foo.Map(foo);
+
+            Assert.IsTrue(bar.StringToBool == true);
+            Assert.IsTrue(bar.StringToDecimal == 12.52M);
+            Assert.IsTrue(bar.StringToDouble == 12.52);
+            Assert.IsTrue(bar.StringToInt == 55);
+            Assert.IsTrue(bar.StringToLong == 10000);
+
+        }
+        [TestMethod]
+        public void DefaultCopy_ReturnNullReference()
+        {
+            var mapSlave = new Bar();
+
+            var foo = mapSlave.Map(default(Bar));
+            Assert.IsTrue(foo == null);
+        }
+
+        [TestMethod]
+        public void ShouldSkip_ReferenceObjects()
+        {
+            var foo = new FooReference()
+            {
+                ConvertTest = "I passed!",
+                ReferenceObject = new FooMissingMember()
+                {
+                    A = "Should not have copied"
+                }
+            };
+
+            var bar = foo.Map(foo);
+
+            Assert.AreEqual(foo.ConvertTest, bar.ConvertTest);
+            Assert.IsNull(bar.ReferenceObject);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void ShouldError_FormatException()
+        {
+            var foo = new FooConvertCopy()
+            {
+                StringToBool = "123",
+                StringToDecimal = "12.52",
+                StringToDouble = "12.52",
+                StringToInt = "55",
+                StringToLong = "10000"
+            };
+
+            var bar = foo.Map(foo);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(MissingMemberException))]
+        public void ShouldError_AllPropertiesMustMatch()
+        {
+            var bar = new BarMissingMember()
+            {
+                A = "123",
+                B = "123"
+            };
+
+            var foo = bar.Map(bar);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void ShouldError_RejectNullReferences()
+        {
+            var mapSlave = new BarRejectNullReference();
+            mapSlave.Map(default(BarRejectNullReference));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ShouldError_InvalidCastException()
+        {
+            //This method differs from `ShouldError_FormatException` in that this occurs only when the `DefaultCopyStrategy` is used
+            //while the `FormatException` is raised if the `ConvertCopyStrategy` is used
+
+            var foo = new FooInvalidCastException()
+            {
+                InvalidCast = "123"
+            };
+
+            var bar = foo.Map(foo);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void ShouldError_RejectNullReferences_PropertyLevel()
+        {
+            var foo = new FooNullProperty();
+            var bar = foo.Map(foo);
+        }
+    }
+}
