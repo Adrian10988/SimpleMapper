@@ -67,6 +67,7 @@
     <Compile Include="Models\FooNullProperty.cs" />
     <Compile Include="Models\FooReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -9,10 +9,10 @@ namespace SimpleMapper
     public abstract class BaseMappable<TIn, TOut> : IMappable<TIn, TOut> where TOut: new()
     {
         private ClassMappingConfiguration _config;
-        private IGetProperties _getProps;
-        private IClassLevelRuleFactory _classLevelRuleFactory;
-        private IClassMapper _mapper;
-        private IClassMappingConfigurationFactory _classMappingConfigFact;
+        private readonly IGetProperties _getProps;
+        private readonly IClassLevelRuleFactory _classLevelRuleFactory;
+        private readonly IClassMapper _mapper;
+        private readonly IClassMappingConfigurationFactory _classMappingConfigFact;
 
         public BaseMappable()
         {
