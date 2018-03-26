@@ -60,6 +60,7 @@ Now I know what you are thinking.. How do I do more complex mapping? Just implem
 - `[ImplicitlyConvertPrimitives]` is class level and will tell SimpleMapper to convert between strings and numeric types
 - `[RejectNullReferences]` is class *and* property level. It will tell SimpleMapper to throw `NullReferenceExceptions` should it encounter a null reference at the class or property level.
 - `[RequireAllProperties]` is class level and will tell SimpleMapper to double check that both mapping classes have the same exact properties. If class A has property 1 but Class B does not have property 1, SimpleMapper will throw an exception.
+- `[MapTp]` is property level and allows you to explicitly name the property on the mapping target. This allows you to map properties with different names. If no property is found, the mapping will not take place.
 
 # Pre Runtime validation
 `Validator.ValidateMappings` will take a list of `Assembly` types and will extract all classes that inherit from `BaseMappable` and run pre-runtime checks on them to make sure you can unit test your mappings. Make sure to create a unit test using this method.
@@ -70,6 +71,5 @@ Now I know what you are thinking.. How do I do more complex mapping? Just implem
 
 
 # Road Map
-- 1.0.1 - More unit test coverage
-- 1.1.0 - `[MapFrom]` attribute will allow mapping properties with different names
+- 1.1.1 - More unit test coverage
 - 1.2.0 - Use of dependency injection within the project
