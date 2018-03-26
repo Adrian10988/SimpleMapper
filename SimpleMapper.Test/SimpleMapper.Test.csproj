@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CopyTests.cs" />
+    <Compile Include="Models\BarExplicitModel.cs" />
     <Compile Include="Models\BarMissingMember.cs" />
     <Compile Include="Models\BarNullProperty.cs" />
     <Compile Include="Models\BarReference.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Models\DefaultCopy\BarInvalidCast.cs" />
     <Compile Include="Models\DefaultCopy\Foo.cs" />
     <Compile Include="Models\DefaultCopy\FooInvalidCastException.cs" />
+    <Compile Include="Models\FooExplicitModel.cs" />
     <Compile Include="Models\FooMissingMember.cs" />
     <Compile Include="Models\FooNullProperty.cs" />
     <Compile Include="Models\FooReference.cs" />

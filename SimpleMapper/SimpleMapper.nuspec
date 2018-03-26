@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Adr.SimpleMapper</id>
+    <version>1.1.0</version>
+    <title>Adr.SimpleMapper</title>
+    <authors>Adrian Campos</authors>
+    <owners>Adrian Campos</owners>
+    <licenseUrl>https://github.com/Adrian10988/SimpleMapper/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Adrian10988/SimpleMapper</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Config-less mapping in C#. As simple as it gets.</description>
+    <releaseNotes>
+      - Added [MapTo] attribute
+      - Added unit tests for new attribute</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>C# Mapper Mapping</tags>
+  </metadata>
+</package>

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ShipBob.Mapper.Test.Models;
 using SimpleMapper.Test.Models;
 using SimpleMapper.Test.Models.ConvertCopy;
 using SimpleMapper.Test.Models.DefaultCopy;
@@ -80,6 +81,30 @@ namespace SimpleMapper.Test
 
             Assert.AreEqual(foo.ConvertTest, bar.ConvertTest);
             Assert.IsNull(bar.ReferenceObject);
+        }
+
+        [TestMethod]
+        public void MapToAttribute_HappyPath()
+        {
+            var foo = new FooExplicitModel()
+            {
+                A1 = "Test",
+                B1 = 1,
+                C1 = 2.12,
+                D1 = 2.33M,
+                E1 = true,
+                F1 = 999
+            };
+
+            var bar = foo.Map(foo);
+
+            Assert.AreEqual(foo.A1, bar.A2);
+            Assert.AreEqual(foo.B1, bar.B2);
+            Assert.AreEqual(foo.C1, bar.C2);
+            Assert.AreEqual(foo.D1, bar.D2);
+            Assert.AreEqual(foo.E1, bar.E2);
+            Assert.AreEqual(foo.F1, bar.F2);
+            
         }
 
         [TestMethod]

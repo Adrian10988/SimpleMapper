@@ -16,11 +16,14 @@ namespace SimpleMapper
         private readonly IEnumerable<IClassLevelRule> _rules;
         private readonly IGetProperties _getProps;
         private readonly ICopyStrategyFactory _copyStrategyFactory;
-        public ClassMapper(IEnumerable<IClassLevelRule> rules, IGetProperties getProps, ICopyStrategyFactory copyStrategyFactory)
+        private readonly IPropertyMappingStrategyFactory _propertyMappingStrategyFactory;
+        public ClassMapper(IEnumerable<IClassLevelRule> rules, IGetProperties getProps, ICopyStrategyFactory copyStrategyFactory,
+            IPropertyMappingStrategyFactory propertyMappingStrategyFactory)
         {
             _rules = rules;
             _copyStrategyFactory = copyStrategyFactory;
             _getProps = getProps;
+            _propertyMappingStrategyFactory = propertyMappingStrategyFactory;
         }
 
         public TOut Map<TIn, TOut>(ClassMappingConfiguration classConfig, TIn fromGeneric) where TOut: new()
@@ -42,7 +45,8 @@ namespace SimpleMapper
 
             foreach(var prop in fProps)
             {
-                var matchingToProp = tProps.FirstOrDefault(a => a.Name == prop.Name);
+                var propMapStrategy = _propertyMappingStrategyFactory.Create(prop);
+                var matchingToProp = propMapStrategy.Match(tProps, prop);
 
                 if (matchingToProp == null)
                     continue; //default behavior, props that don't line up are ignored. pre processing checks handle instances where props should line up but don't

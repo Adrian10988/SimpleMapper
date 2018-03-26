@@ -23,7 +23,8 @@ namespace SimpleMapper
             _mapper = new ClassMapper(
                 _classLevelRuleFactory.CreateRules(_config),
                 _getProps,
-                new CopyStrategyFactory());
+                new CopyStrategyFactory(),
+                new PropertyMappingStrategyFactory());
         }
 
        
