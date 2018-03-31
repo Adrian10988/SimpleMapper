@@ -8,11 +8,11 @@ namespace SimpleMapper
 {
     public abstract class BaseMappable<TIn, TOut> : IMappable<TIn, TOut> where TOut: new()
     {
-        private ClassMappingConfiguration _config;
-        private readonly IGetProperties _getProps;
-        private readonly IClassLevelRuleFactory _classLevelRuleFactory;
-        private readonly IClassMapper _mapper;
-        private readonly IClassMappingConfigurationFactory _classMappingConfigFact;
+        protected ClassMappingConfiguration _config;
+        protected readonly IGetProperties _getProps;
+        protected readonly IClassLevelRuleFactory _classLevelRuleFactory;
+        protected IClassMapper _mapper;
+        protected readonly IClassMappingConfigurationFactory _classMappingConfigFact;
 
         public BaseMappable()
         {
@@ -33,7 +33,7 @@ namespace SimpleMapper
             return _mapper.Map<TIn, TOut>(_config, mapTarget);
         }
 
-        private ClassMappingConfiguration GetClassMappingConfiguration()
+        protected internal ClassMappingConfiguration GetClassMappingConfiguration()
         {
             return _classMappingConfigFact.Create(GetType());
         }
