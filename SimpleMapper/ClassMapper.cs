@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SimpleMapper
 {
-    internal class ClassMapper : IClassMapper
+    public class ClassMapper : IClassMapper
     {
         private readonly IEnumerable<IClassLevelRule> _rules;
         private readonly IGetProperties _getProps;
