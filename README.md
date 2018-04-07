@@ -1,5 +1,5 @@
 # Breaking Changes coming soon
-Version 2.0 will see a change in the foundation of the attributes system. Currently attributes are placed on the mapping *originating* class. This confines you to a one to one mapping relationship. Take for example:  
+Version 2.0 will see a change in the foundation of the attributes system. Currently attributes are placed on the class that *needs to be mapped*. This confines you to a one to one mapping relationship. Take for example:  
   
 	[RequireAllProperties]
 	public class Foo : IMappable<Foo, Bar>
@@ -21,7 +21,7 @@ Version 2.0 will see a change in the foundation of the attributes system. Curren
 	
 In the above case, `Foo` is now tied to `Bar` and you may never be able to map a `Foo` to a `HalfBar`. Even if you could have multiple associations, `Foo` requires all properties to match and thus `HalfBar` would be an invalid mapping target. 
 
-In Version 2.0 the mapping attributes will move over to the mapping *result* class. This opens up the possibility of having a one to many relationship between mappings. We can have one view model tied to many domain models or one domain model tied to many view models. Typically this is enough as we should be defining very specific models. Many to many relationships would make it too easy to start mixing responsibilities within models. This is how the new system will work: 
+In Version 2.0 the mapping attributes will move over to the mapping *result* class. This opens up the possibility of having a one to many relationship between mappings. We can have one view model tied to many domain models or one domain model tied to many view models. This should be enough to work with as we should be defining very specific models. Many to many relationships would make it too easy to start mixing responsibilities within models. This is how the new system will work: 
 
 	public class Foo 
 		public string Name{get;set;}
@@ -29,14 +29,14 @@ In Version 2.0 the mapping attributes will move over to the mapping *result* cla
 	}
 
 	[RequireAllProperties]
-	public class Bar : IMappable<Foo, Bar>
+	public class Bar : IMappable<Foo, Bar> //Foo is the class that will be mapped to Bar
 	{
 		public string Name {get; set;}
 		public int Age {get; set;}
 	}
 
 	//Do not require all properties, if we did, HalfBar would blow up
-	public class HalfBar : IMappable<Foo, HalfBar>
+	public class HalfBar : IMappable<Foo, HalfBar> //Foo is the class that will be mapped to HalfBar
 	{
 		public string Name {get; set;}
 	}
