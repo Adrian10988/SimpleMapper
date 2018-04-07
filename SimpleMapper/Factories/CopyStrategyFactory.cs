@@ -15,12 +15,6 @@ namespace SimpleMapper.Factories
 
         public ICopyStrategy GetStrategy(ClassMappingConfiguration classConfig, PropertyMappingConfiguration propConfig)
         {
-            if (propConfig.Bypass)
-            {
-                return new BypassCopyStrategy();
-            }
-
-
             if (classConfig.ConvertPrimitives)
             {
                 

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SimpleMapper
 {
-    public abstract class BaseMappable<TFrom> : IMappable<TFrom> where TFrom: new()
+    public abstract class BaseMappable<TFrom, TOut> : IMappable<TFrom, TOut> where TFrom : new() where TOut : new()
     {
         private ClassMappingConfiguration _config;
         private readonly IGetProperties _getProps;
@@ -28,7 +28,7 @@ namespace SimpleMapper
         }
 
        
-        public TOut Map<TOut>(TFrom fromObj) where TOut : new ()
+        public TOut Map(TFrom fromObj)
         {
             return _mapper.Map<TFrom, TOut>(_config, fromObj);
         }

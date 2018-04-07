@@ -1,4 +1,5 @@
 ﻿using SimpleMapper;
+using SimpleMapper.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace ShipBob.Mapper.Test.Models.DefaultCopy
 {
-    public class Foo : BaseMappable<Bar, Foo>
+    [RejectNullReferences]
+    public class FooRejectNullReferences : BaseMappable<Bar, FooRejectNullReferences>
     {
+        [RejectNullReferences]
         public string FirstName { get; set; }
         public int Age { get; set; }
         public long SecondsAlive { get; set; }

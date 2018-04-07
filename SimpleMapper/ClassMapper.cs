@@ -65,7 +65,7 @@ namespace SimpleMapper
 
             var attrs = p.GetCustomAttributes().ToList();
 
-            model.Bypass = attrs.Any(a => a is BypassAttribute);
+            //model.Bypass = attrs.Any(a => a is BypassAttribute);
             model.RejectNullReferences = attrs.Any(a => a is RejectNullReferencesAttribute);
 
             return model;

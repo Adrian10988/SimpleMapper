@@ -11,7 +11,7 @@ namespace SimpleMapper.PropertyMappingStrategies
     {
         public PropertyInfo Match(IEnumerable<PropertyInfo> matchList, PropertyInfo matchKey)
         {
-            var attr = matchKey.GetCustomAttribute(typeof(MapToAttribute), false) as MapToAttribute;
+            var attr = matchKey.GetCustomAttribute(typeof(MapFromAttribute), false) as MapFromAttribute;
 
             if (attr == null)
                 return null;

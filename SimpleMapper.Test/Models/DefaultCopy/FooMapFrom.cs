@@ -1,4 +1,5 @@
 ﻿using SimpleMapper;
+using SimpleMapper.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,10 @@ using System.Threading.Tasks;
 
 namespace ShipBob.Mapper.Test.Models.DefaultCopy
 {
-    public class Foo : BaseMappable<Bar, Foo>
+    public class FooMapFrom : BaseMappable<Bar, FooMapFrom>
     {
-        public string FirstName { get; set; }
+        [MapFrom(PropertyName = "FirstName")]
+        public string LastName { get; set; }
         public int Age { get; set; }
         public long SecondsAlive { get; set; }
         public decimal MoneyToTheWallet { get; set; }

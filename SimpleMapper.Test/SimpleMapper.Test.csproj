@@ -52,9 +52,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CopyTests.cs" />
+    <Compile Include="CopyIntegrationTests.cs" />
     <Compile Include="Models\DefaultCopy\Bar.cs" />
+    <Compile Include="Models\DefaultCopy\Box.cs" />
     <Compile Include="Models\DefaultCopy\Foo.cs" />
+    <Compile Include="Models\DefaultCopy\FooMapFrom.cs" />
+    <Compile Include="Models\DefaultCopy\FooRejectNullReferences.cs" />
+    <Compile Include="Models\DefaultCopy\FooRequireAllProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatorTests.cs" />
   </ItemGroup>
