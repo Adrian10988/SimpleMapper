@@ -29,14 +29,14 @@ In Version 2.0 the mapping attributes will move over to the mapping *result* cla
 	}
 
 	[RequireAllProperties]
-	public class Bar : IMappable<Foo>
+	public class Bar : IMappable<Foo, Bar>
 	{
 		public string Name {get; set;}
 		public int Age {get; set;}
 	}
 
 	//Do not require all properties, if we did, HalfBar would blow up
-	public class HalfBar : IMappable<Foo>
+	public class HalfBar : IMappable<Foo, HalfBar>
 	{
 		public string Name {get; set;}
 	}
