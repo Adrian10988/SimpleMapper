@@ -4,8 +4,8 @@ using System.Text;
 
 namespace SimpleMapper
 {
-    public interface IMappable<TIn, TOut> where TOut: new()
+    public interface IMappable<TOut> where TOut: new()
     {
-        TOut Map(TIn mapTarget);
+        TOut Map<TIn>(TIn mapTarget);
     }
 }
