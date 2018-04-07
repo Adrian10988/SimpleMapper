@@ -8,6 +8,6 @@ namespace SimpleMapper.CopyStrategies
 {
     public interface ICopyStrategy
     {
-        void Copy<TOut>(object tFrom, TOut tTo, PropertyInfo from, PropertyInfo to, PropertyMappingConfiguration config);
+        void Copy<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp, PropertyMappingConfiguration toPropConfig);
     }
 }

@@ -25,7 +25,7 @@ namespace SimpleMapper.Rules
                 if (fromProps.Except(toProps).Any())
                 {
                     throw new MissingMemberException(@"There are missing properties in one of the mapping targets. If this is not desired behavior please remove 
-the class level attribute entitled [RequireAllPropertiesAttribute] from [" + from.Name + "]");
+the class level attribute entitled [RequireAllPropertiesAttribute] from [" + to.Name + "]");
                 }
             }
         }

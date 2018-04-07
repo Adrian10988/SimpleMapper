@@ -73,7 +73,7 @@ namespace SimpleMapper.Validation
                                         let y = x.BaseType
                                         where !x.IsAbstract && !x.IsInterface &&
                                         y != null && y.IsGenericType &&
-                                        y.GetGenericTypeDefinition() == typeof(BaseMappable<,>)
+                                        y.GetGenericTypeDefinition() == typeof(BaseMappable<>)
                                         select x;
 
             return types.ToList();

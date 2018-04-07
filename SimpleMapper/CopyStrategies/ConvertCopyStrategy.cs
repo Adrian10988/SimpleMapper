@@ -16,79 +16,108 @@ namespace SimpleMapper.CopyStrategies
         {
             _rules = rules;
         }
-        public void Copy<TOut>(object tFrom, TOut tTo, PropertyInfo from, PropertyInfo to, PropertyMappingConfiguration config)
+        public void Copy<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp, PropertyMappingConfiguration toPropConfig)
         {
-            if (!ShouldCopy(tFrom, tTo, from, to, config))
+            if (!ShouldCopy(tFrom, tTo, toProp, fromProp, toPropConfig))
                 return;
 
             if (_rules != null && _rules.Any())
-                _rules.ToList().ForEach(a => a.Run(config, tFrom, tTo, from, to));
+                _rules.ToList().ForEach(a => a.Run(toPropConfig, tFrom, tTo, toProp, fromProp));
 
             var tFromType = tFrom.GetType();
             var tToType = tTo.GetType();
           
 
-            var fromVal = from.GetValue(tFrom);
+            var fromVal = fromProp.GetValue(tFrom);
             //no casting needed
-            if(from.PropertyType == to.PropertyType)
+            if(toProp.PropertyType == fromProp.PropertyType)
             {
-                to.SetValue(tTo, fromVal);
+                toProp.SetValue(tTo, fromVal);
                 return;
             }
 
             //if destination is string then job is easy
-            if(to.PropertyType == typeof(string))
+            if(toProp.PropertyType == typeof(string))
             {
-                to.SetValue(tTo, fromVal.ToString());
+                toProp.SetValue(tTo, fromVal.ToString());
                 return;
             }
 
             //destination is some number type
-            ConvertToNumber(tFrom, tTo, from, to);
+            if(!new List<Type>()
+            {
+                typeof(DateTime),
+                typeof(TimeSpan)
+            }.Contains(toProp.PropertyType))
+            {
+                ConvertToNumber(tFrom, tTo, toProp, fromProp);
+            }
+            else
+            {
+                //destination type is date or timespan value
+                ConvertToDateOrTimeValue(tFrom, tTo, toProp, fromProp);
+            }
+            
         }
 
-       
 
-        private void ConvertToNumber<TOut>(object tFrom, TOut tTo, PropertyInfo from, PropertyInfo to)
+        private void ConvertToDateOrTimeValue<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp)
         {
-            var fVal = from.GetValue(tFrom);
-            var toType = to.PropertyType;
-            if(from.PropertyType == typeof(string))
+            if (fromProp.PropertyType != typeof(string))
+                throw new ArgumentException($"SimpleMapper can only implicityl convert string types to date or timespan types. You attempted to convert type : {fromProp.PropertyType} to type : {toProp.PropertyType}"
+                    + $"From class: {tFrom.GetType()}.{fromProp.Name} to Class: {tTo.GetType()}.{toProp.Name}");
+
+            var fVal = fromProp.GetValue(tFrom);
+
+            if(toProp.PropertyType == typeof(DateTime))
+            {
+                toProp.SetValue(tTo, DateTime.Parse(fVal.ToString()));
+            }
+            else
+            {
+                toProp.SetValue(tTo, TimeSpan.Parse(fVal.ToString()));
+            }
+        }
+        private void ConvertToNumber<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp)
+        {
+            var fVal = fromProp.GetValue(tFrom);
+            var toType = toProp.PropertyType;
+            if(fromProp.PropertyType == typeof(string))
             {
                 if(toType == typeof(int))
                 {
-                    to.SetValue(tTo, int.Parse(fVal.ToString()));
+                    toProp.SetValue(tTo, int.Parse(fVal.ToString()));
                     return;
                 }
 
                 if(toType == typeof(long))
                 {
-                    to.SetValue(tTo, long.Parse(fVal.ToString()));
+                    toProp.SetValue(tTo, long.Parse(fVal.ToString()));
                     return;
                 }
 
                 if(toType == typeof(double))
                 {
-                    to.SetValue(tTo, double.Parse(fVal.ToString()));
+                    toProp.SetValue(tTo, double.Parse(fVal.ToString()));
                     return;
                 }
 
                 if(toType == typeof(decimal))
                 {
-                    to.SetValue(tTo, decimal.Parse(fVal.ToString()));
+                    toProp.SetValue(tTo, decimal.Parse(fVal.ToString()));
                     return;
                 }
 
                 if(toType == typeof(bool))
                 {
-                    to.SetValue(tTo, bool.Parse(fVal.ToString()));
+                    toProp.SetValue(tTo, bool.Parse(fVal.ToString()));
                     return;
                 }
             }
             else
             {
                 //conversion is number to number
-                to.SetValue(tTo, Convert.ChangeType(fVal, toType));
+                toProp.SetValue(tTo, Convert.ChangeType(fVal, toType));
             }
         }
 

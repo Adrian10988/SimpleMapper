@@ -17,7 +17,9 @@ namespace SimpleMapper
             typeof(long),
             typeof(double),
             typeof(decimal),
-            typeof(bool)
+            typeof(bool),
+            typeof(DateTime),
+            typeof(TimeSpan)
             };
         }
     }
