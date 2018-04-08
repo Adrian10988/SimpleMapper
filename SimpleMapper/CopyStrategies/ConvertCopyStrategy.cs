@@ -8,6 +8,7 @@ using System.Text;
 
 namespace SimpleMapper.CopyStrategies
 {
+    //TODO - Class is getting too complex, need to refactor to a more methodical approach. Perhaps another strategy pattern factory -- adrian10988
     public class ConvertCopyStrategy : BaseCopyStrategy, ICopyStrategy
     {
         private readonly IEnumerable<IPropertyLevelRule> _rules;
@@ -36,18 +37,23 @@ namespace SimpleMapper.CopyStrategies
                 return;
             }
 
+           
+
             //if destination is string then job is easy
             if(toProp.PropertyType == typeof(string))
             {
-                toProp.SetValue(tTo, fromVal.ToString());
+                toProp.SetValue(tTo, fromVal?.ToString());
                 return;
             }
 
+
             //destination is some number type
-            if(!new List<Type>()
+            if (!new List<Type>()
             {
                 typeof(DateTime),
-                typeof(TimeSpan)
+                typeof(TimeSpan),
+                typeof(DateTime?),
+                typeof(TimeSpan?)
             }.Contains(toProp.PropertyType))
             {
                 ConvertToNumber(tFrom, tTo, toProp, fromProp);
@@ -63,11 +69,25 @@ namespace SimpleMapper.CopyStrategies
 
         private void ConvertToDateOrTimeValue<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp)
         {
-            if (fromProp.PropertyType != typeof(string))
-                throw new ArgumentException($"SimpleMapper can only implicityl convert string types to date or timespan types. You attempted to convert type : {fromProp.PropertyType} to type : {toProp.PropertyType}"
+            if (fromProp.PropertyType != typeof(string) && fromProp.PropertyType != typeof(DateTime) && fromProp.PropertyType != typeof(DateTime?))
+                throw new ArgumentException($"SimpleMapper can only implicity convert string types to date or timespan types. Additionally it can convert between nullable datestimes and nullable timespans. You attempted to convert type : {fromProp.PropertyType} to type : {toProp.PropertyType}"
                     + $"From class: {tFrom.GetType()}.{fromProp.Name} to Class: {tTo.GetType()}.{toProp.Name}");
 
+          
             var fVal = fromProp.GetValue(tFrom);
+
+            if (fVal == null && Nullable.GetUnderlyingType(toProp.PropertyType) != null)
+            {
+                toProp.SetValue(tTo, null);
+                return;
+            }
+            else if(fVal == null && Nullable.GetUnderlyingType(toProp.PropertyType) == null)
+            {
+                // destination prop is not nullable
+                throw new InvalidCastException($"{tTo.GetType().Name}.{toProp.Name} was passed a null value but is not nullable");
+            }
+                
+
 
             if(toProp.PropertyType == typeof(DateTime))
             {
@@ -81,6 +101,17 @@ namespace SimpleMapper.CopyStrategies
         private void ConvertToNumber<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp)
         {
             var fVal = fromProp.GetValue(tFrom);
+
+            if (fVal == null)
+            {
+                if (Nullable.GetUnderlyingType(toProp.PropertyType) != null)
+                    toProp.SetValue(tTo, null);
+                else
+                    throw new InvalidCastException($"{tTo.GetType().Name}.{toProp.Name} is not nullable and was passed a null value from"
+                        + $" {tFrom.GetType().Name}.{fromProp.Name}");
+                return;
+            }
+
             var toType = toProp.PropertyType;
             if(fromProp.PropertyType == typeof(string))
             {

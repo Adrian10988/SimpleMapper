@@ -91,7 +91,7 @@ namespace Tests
 
         [TestMethod]
         [ExpectedException(typeof(MissingMemberException))]
-        public void DefaultCopy_AllPropertiesRequired()
+        public void ConversionCopy_AllPropertiesRequired()
         {
             var bar = new Bar()
             {
@@ -108,5 +108,86 @@ namespace Tests
             var mapSlave = new FooRequireAllProperties();
             var data = mapSlave.Map(bar);
         }
+
+        [TestMethod]
+        public void ConversionCopy_NullableToString_WhenNullableHasValue()
+        {
+            var bar = new NullableBar()
+            {
+                Age = 10,
+                FirstName = "John"
+            };
+
+
+            var mapSlave = new NullableFoo();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(bar.FirstName, data.FirstName);
+            Assert.AreEqual(data.Age, "10");
+        }
+
+        [TestMethod]
+        public void ConversionCopy_NullableToString_WhenNullableHasNoValue()
+        {
+            var bar = new NullableBar()
+            {
+                Age = null,
+                FirstName = "John"
+            };
+
+
+            var mapSlave = new NullableFoo();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(bar.FirstName, data.FirstName);
+            Assert.AreEqual(data.Age, bar.Age);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConversionCopy_Int_To_DateTime()
+        {
+            var bar = new BarIntToDateTime()
+            {
+                Property = 1
+            };
+
+            var mapSlave = new FooIntToDateTime();
+
+            var data = mapSlave.Map(bar);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConversionCopy_NullableDate_ToNonNullableDate()
+        {
+            var bar = new NullableBar()
+            {
+                Age = 11,
+                BirthDate = null,
+                FirstName = "John"
+            };
+
+            var mapSlave = new NonNullableFoo();
+            var data = mapSlave.Map(bar);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConversionCopy_NullableNumber_ToNonNullableNumber()
+        {
+            var bar = new NullableBar()
+            {
+                Age = null,
+                BirthDate = DateTime.Now,
+                FirstName = "John"
+            };
+
+            var mapSlave = new NonNullableFoo();
+            var data = mapSlave.Map(bar);
+        }
+
     }
 }
