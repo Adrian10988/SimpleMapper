@@ -5,7 +5,7 @@ using System.Text;
 namespace SimpleMapper.Attributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class MapToAttribute : Attribute
+    public class MapFromAttribute : Attribute
     {
         public string PropertyName { get; set; }
     }

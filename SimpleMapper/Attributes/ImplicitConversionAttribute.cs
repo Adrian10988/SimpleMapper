@@ -5,7 +5,7 @@ using System.Text;
 namespace SimpleMapper.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class ImplicitlyConvertPrimitives : Attribute
+    public class ImplicitConversionAttribute : Attribute
     {
     }
 }

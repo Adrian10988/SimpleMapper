@@ -52,24 +52,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CopyTests.cs" />
-    <Compile Include="Models\BarExplicitModel.cs" />
-    <Compile Include="Models\BarMissingMember.cs" />
-    <Compile Include="Models\BarNullProperty.cs" />
-    <Compile Include="Models\BarReference.cs" />
-    <Compile Include="Models\BarRejectNullReference.cs" />
-    <Compile Include="Models\ConvertCopy\BarConvertCopy.cs" />
-    <Compile Include="Models\ConvertCopy\FooConvertCopy.cs" />
-    <Compile Include="Models\DefaultCopy\Bar.cs" />
-    <Compile Include="Models\DefaultCopy\BarInvalidCast.cs" />
-    <Compile Include="Models\DefaultCopy\Foo.cs" />
-    <Compile Include="Models\DefaultCopy\FooInvalidCastException.cs" />
-    <Compile Include="Models\FooExplicitModel.cs" />
-    <Compile Include="Models\FooMissingMember.cs" />
-    <Compile Include="Models\FooNullProperty.cs" />
-    <Compile Include="Models\FooReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -80,6 +63,7 @@
       <Name>SimpleMapper</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

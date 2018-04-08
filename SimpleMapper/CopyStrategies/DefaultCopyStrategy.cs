@@ -16,19 +16,19 @@ namespace SimpleMapper.CopyStrategies
         {
             _rules = rules;
         }
-        public void Copy<TOut>(object tFrom, TOut tTo, PropertyInfo from, PropertyInfo to, PropertyMappingConfiguration config)
+        public void Copy<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp, PropertyMappingConfiguration toPropConfig)
         {
-            if (!ShouldCopy(tFrom, tTo, from, to, config))
+            if (!ShouldCopy(tFrom, tTo, toProp, fromProp, toPropConfig))
                 return;
 
             if (_rules != null && _rules.Any())
-                _rules.ToList().ForEach(a => a.Run(config, tFrom, tTo, from, to));
+                _rules.ToList().ForEach(a => a.Run(toPropConfig, tFrom, tTo, toProp, fromProp));
 
-            if (from.PropertyType != to.PropertyType)
-                throw new InvalidCastException($"{tFrom.GetType()}.{from.Name} is not the same type as {tTo.GetType()}.{to.Name}");
+            if (toProp.PropertyType != fromProp.PropertyType)
+                throw new InvalidCastException($"{tFrom.GetType()}.{toProp.Name} is not the same type as {tTo.GetType()}.{fromProp.Name}");
 
-            var fromVal = from.GetValue(tFrom);
-            to.SetValue(tTo, fromVal);
+            var fromVal = fromProp.GetValue(tFrom);
+            toProp.SetValue(tTo, fromVal);
         }
     }
 }

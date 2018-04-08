@@ -13,7 +13,7 @@ namespace SimpleMapper.Factories
         {
             var config = new ClassMappingConfiguration();
             var attributes = t.GetCustomAttributes(true).ToList();
-            config.ConvertPrimitives = attributes.Any(a => a is ImplicitlyConvertPrimitives);
+            config.ConvertPrimitives = attributes.Any(a => a is ImplicitConversionAttribute);
             config.RejectNullReferences = attributes.Any(a => a is RejectNullReferencesAttribute);
             config.RequireAllProperties = attributes.Any(a => a is RequireAllPropertiesAttribute);
 

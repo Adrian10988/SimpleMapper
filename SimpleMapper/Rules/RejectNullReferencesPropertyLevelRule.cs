@@ -8,12 +8,12 @@ namespace SimpleMapper.Rules
 {
     public class RejectNullReferencesPropertyLevelRule : IPropertyLevelRule
     {
-        public void Run<TOut>(PropertyMappingConfiguration config, object tFrom, TOut tTo, PropertyInfo from, PropertyInfo to)
+        public void Run<TOut>(PropertyMappingConfiguration toPropConfig, object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp)
         {
-            if(config.RejectNullReferences && (from.GetValue(tFrom) is null))
+            if(toPropConfig.RejectNullReferences && (fromProp.GetValue(tFrom) is null))
             {
                 throw new NullReferenceException(@"A null property reference was passed into the mapper. If this is not desired behavior please remove 
-the property level attribute entitled [RejectNullReferences] from ["+tFrom.GetType().Name+ "].["+from.Name+"]");
+the property level attribute entitled [RejectNullReferences] from ["+tTo.GetType().Name+ "].["+toProp.Name+"]");
             }
         }
     }

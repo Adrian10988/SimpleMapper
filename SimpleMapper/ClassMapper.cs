@@ -26,10 +26,10 @@ namespace SimpleMapper
             _propertyMappingStrategyFactory = propertyMappingStrategyFactory;
         }
 
-        public TOut Map<TIn, TOut>(ClassMappingConfiguration classConfig, TIn fromGeneric) where TOut: new()
+        public TOut Map<TFrom, TOut>(ClassMappingConfiguration classConfig, TFrom fromGeneric) where TOut: new()
         {
 
-            var fromType = ((TIn)Activator.CreateInstance(typeof(TIn))).GetType();
+            var fromType = ((TFrom)Activator.CreateInstance(typeof(TFrom))).GetType();
             var toObject = (TOut)Activator.CreateInstance(typeof(TOut));
             var toType = toObject.GetType();
             //run pre processing checks
@@ -40,20 +40,20 @@ namespace SimpleMapper
             if (fromGeneric == null)
                 return default(TOut);
 
-            var fProps = _getProps.Get(fromType);
-            var tProps = _getProps.Get(toType);
+            var fromProps = _getProps.Get(fromType);
+            var toProps = _getProps.Get(toType);
 
-            foreach(var prop in fProps)
+            foreach(var toProp in toProps)
             {
-                var propMapStrategy = _propertyMappingStrategyFactory.Create(prop);
-                var matchingToProp = propMapStrategy.Match(tProps, prop);
+                var propMapStrategy = _propertyMappingStrategyFactory.Create(toProp);
+                var fromProp = propMapStrategy.Match(fromProps, toProp);
 
-                if (matchingToProp == null)
+                if (fromProp == null)
                     continue; //default behavior, props that don't line up are ignored. pre processing checks handle instances where props should line up but don't
 
-                var propConfig = GetPropertyMappingConfiguration(prop);
-                var strategy = _copyStrategyFactory.GetStrategy(classConfig, propConfig);
-                strategy.Copy(fromGeneric, toObject, prop, matchingToProp, propConfig);
+                var toPropConfig = GetPropertyMappingConfiguration(toProp);
+                var strategy = _copyStrategyFactory.GetStrategy(classConfig, toPropConfig);
+                strategy.Copy(fromGeneric, toObject, toProp, fromProp, toPropConfig);
             }
 
             return toObject;
@@ -65,7 +65,7 @@ namespace SimpleMapper
 
             var attrs = p.GetCustomAttributes().ToList();
 
-            model.Bypass = attrs.Any(a => a is BypassAttribute);
+            //model.Bypass = attrs.Any(a => a is BypassAttribute);
             model.RejectNullReferences = attrs.Any(a => a is RejectNullReferencesAttribute);
 
             return model;

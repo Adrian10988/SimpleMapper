@@ -22,10 +22,10 @@ namespace SimpleMapper.Rules
                 var fromProps = _getProps.Get(from).Select(a => a.Name).ToList();
                 var toProps = _getProps.Get(to).Select(a => a.Name).ToList();
 
-                if (fromProps.Except(toProps).Any())
+                if (toProps.Except(fromProps).Any())
                 {
                     throw new MissingMemberException(@"There are missing properties in one of the mapping targets. If this is not desired behavior please remove 
-the class level attribute entitled [RequireAllPropertiesAttribute] from [" + from.Name + "]");
+the class level attribute entitled [RequireAllPropertiesAttribute] from class: [" + to.Name + "]");
                 }
             }
         }
