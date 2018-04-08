@@ -134,6 +134,59 @@ namespace Tests
             Assert.AreEqual(bar.TimeSpanAlive, fooMapResult.TimeSpanAlive);
         }
 
+        [TestMethod]
+        public void DefaultCopy_Nullable_HappyPath()
+        {
+            var nBar = new NullableBar()
+            {
+                FirstName = "John",
+                Age = 12,
+                BirthDate = null
+            };
+
+            var mapSlave = new NullableFoo();
+
+            var data = mapSlave.Map(nBar);
+
+            Assert.AreEqual(data.FirstName, nBar.FirstName);
+            Assert.AreEqual(data.Age, nBar.Age);
+            Assert.IsNull(data.BirthDate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void DefaultCopy_Nullable_To_NonNullable()
+        {
+            var nBar = new NullableBar()
+            {
+                FirstName = "John",
+                Age = 12,
+                BirthDate = null
+            };
+
+            var mapSlave = new NonNullableFoo();
+
+            var data = mapSlave.Map(nBar);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void DefaultCopy_NonNullale_To_Nullable()
+        {
+            var bar = new Bar()
+            {
+                FirstName = "John",
+                Age = 11
+            };
+
+            var mapSlave = new NullableFooToBar();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(bar.FirstName, data.FirstName);
+            Assert.IsNotNull(data.Age);
+            Assert.AreEqual(bar.Age, data.Age);
+        }
 
     }
 }
