@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/AaronLenoir/flaclibsharp.svg?branch=master)](https://travis-ci.org/Adrian10988/SimpleMapper)
 # Breaking Changes coming soon
 Version 2.0 will see a change in the foundation of the attributes system. Currently attributes are placed on the class that *needs to be mapped*. This confines you to a one to one mapping relationship. Take for example:  
   
@@ -124,4 +125,4 @@ Now I know what you are thinking.. How do I do more complex mapping? Just implem
 
 
 
-[![Build Status](https://travis-ci.org/AaronLenoir/flaclibsharp.svg?branch=master)](https://travis-ci.org/Adrian10988/SimpleMapper)
+
