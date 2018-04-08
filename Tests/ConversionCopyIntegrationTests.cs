@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tests.Models;
 
 namespace Tests
 {
@@ -91,7 +92,7 @@ namespace Tests
 
         [TestMethod]
         [ExpectedException(typeof(MissingMemberException))]
-        public void DefaultCopy_AllPropertiesRequired()
+        public void ConversionCopy_AllPropertiesRequired()
         {
             var bar = new Bar()
             {
@@ -106,6 +107,64 @@ namespace Tests
             };
 
             var mapSlave = new FooRequireAllProperties();
+            var data = mapSlave.Map(bar);
+        }
+
+        [TestMethod]
+        public void ConversionCopy_EnumToInt()
+        {
+            var bar = new BarEnumToInt()
+            {
+                Enum = Models.TestEnum.One
+            };
+
+            var mapSlave = new FooEnumToInt();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(data.Enum, (int)bar.Enum);
+        }
+
+        [TestMethod]
+        public void ConversionCopy_IntToEnum()
+        {
+            var bar = new BarIntToEnum()
+            {
+                Enum = 1
+            };
+
+            var mapSlave = new FooIntToEnum();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(data.Enum, (TestEnum)bar.Enum);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConversionCopy_EnumToBool()
+        {
+            var bar = new BarEnumToBool()
+            {
+                Enum = TestEnum.One
+            };
+
+            var mapSlave = new FooEnumToBool();
+
+            var data = mapSlave.Map(bar);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void ConversionCopy_BoolToEnum()
+        {
+            var bar = new BarBoolToEnum()
+            {
+                Enum = false
+            };
+
+            var mapSlave = new FooBoolToEnum();
+
             var data = mapSlave.Map(bar);
         }
     }

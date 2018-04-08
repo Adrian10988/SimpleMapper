@@ -22,7 +22,8 @@ namespace Tests
                 IsHappy = true,
                 MoneyToTheWallet = 1789.23M,
                 SecondsAlive = 102928392839383928,
-                TimeSpanAlive = DateTime.Now  - new DateTime(1988, 10, 9)
+                TimeSpanAlive = DateTime.Now  - new DateTime(1988, 10, 9),
+                Enum = TestEnum.One
             };
 
             var fooSlave = new Foo();
@@ -39,6 +40,7 @@ namespace Tests
             Assert.AreEqual(bar.MoneyToTheWallet, fooMapResult.MoneyToTheWallet);
             Assert.AreEqual(bar.SecondsAlive, fooMapResult.SecondsAlive);
             Assert.AreEqual(bar.TimeSpanAlive, fooMapResult.TimeSpanAlive);
+            Assert.AreEqual(bar.Enum, fooMapResult.Enum);
 
 
             Assert.AreEqual(boxMapResult.Age, bar.Age);
@@ -131,5 +133,7 @@ namespace Tests
             Assert.AreEqual(bar.SecondsAlive, fooMapResult.SecondsAlive);
             Assert.AreEqual(bar.TimeSpanAlive, fooMapResult.TimeSpanAlive);
         }
+
+
     }
 }
