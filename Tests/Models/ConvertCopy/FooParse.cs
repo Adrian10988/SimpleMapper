@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.ConvertCopy
+namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversionAttribute]
-    public class Foo : BaseMappable<Bar, Foo>
+    public class FooParse : BaseMappable<BarParse, FooParse>
     {
         public string FirstName { get; set; }
-        public string Age { get; set; }
+        public int Age { get; set; }
         public long SecondsAlive { get; set; }
         public decimal MoneyToTheWallet { get; set; }
         public double GPA { get; set; }

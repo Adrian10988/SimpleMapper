@@ -1,14 +1,17 @@
-﻿using System;
+﻿using SimpleMapper;
+using SimpleMapper.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.ConvertCopy
+namespace Tests.Models.DefaultCopy
 {
-    public class Bar
+    public class FooMapFrom : BaseMappable<Bar, FooMapFrom>
     {
-        public string FirstName { get; set; }
+        [MapFrom(PropertyName = "FirstName")]
+        public string LastName { get; set; }
         public int Age { get; set; }
         public long SecondsAlive { get; set; }
         public decimal MoneyToTheWallet { get; set; }

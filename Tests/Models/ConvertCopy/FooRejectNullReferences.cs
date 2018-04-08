@@ -1,13 +1,18 @@
-﻿using System;
+﻿using SimpleMapper;
+using SimpleMapper.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.DefaultCopy
+namespace Tests.Models.ConvertCopy
 {
-    public class Bar
+    [ImplicitConversionAttribute]
+    [RejectNullReferences]
+    public class FooRejectNullReferences : BaseMappable<Bar, FooRejectNullReferences>
     {
+        [RejectNullReferences]
         public string FirstName { get; set; }
         public int Age { get; set; }
         public long SecondsAlive { get; set; }

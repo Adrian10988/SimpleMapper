@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ShipBob.Mapper.Test.Models;
-using ShipBob.Mapper.Test.Models.DefaultCopy;
+using Tests.Models;
+using Tests.Models.DefaultCopy;
 
-namespace SimpleMapper.Test
+namespace Tests
 {
     [TestClass]
     public class CopyTests

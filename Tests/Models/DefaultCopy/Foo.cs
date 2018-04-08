@@ -1,15 +1,13 @@
 ﻿using SimpleMapper;
-using SimpleMapper.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.DefaultCopy
+namespace Tests.Models.DefaultCopy
 {
-    [RequireAllProperties]
-    public class FooRequireAllProperties : BaseMappable<Bar, FooRequireAllProperties>
+    public class Foo : BaseMappable<Bar, Foo>
     {
         public string FirstName { get; set; }
         public int Age { get; set; }
@@ -19,12 +17,5 @@ namespace ShipBob.Mapper.Test.Models.DefaultCopy
         public DateTime Birthdate { get; set; }
         public TimeSpan TimeSpanAlive { get; set; }
         public bool IsHappy { get; set; }
-
-
-
-
-
-        //This property is not on the Bar class
-        public bool RandomProperty { get; set; }
     }
 }

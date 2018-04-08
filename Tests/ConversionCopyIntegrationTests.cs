@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ShipBob.Mapper.Test.Models.ConvertCopy;
+using Tests.Models.ConvertCopy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test
+namespace Tests
 {
     [TestClass]
     public class ConversionCopyIntegrationTests

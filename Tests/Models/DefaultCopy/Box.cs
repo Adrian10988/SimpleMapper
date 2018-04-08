@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.DefaultCopy
+namespace Tests.Models.DefaultCopy
 {
     public class Box : BaseMappable<Bar, Box>
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShipBob.Mapper.Test.Models.ConvertCopy
+namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversionAttribute]
     public class FooMapFrom : BaseMappable<Bar, FooMapFrom>
