@@ -48,7 +48,7 @@ namespace SimpleMapper.CopyStrategies
 
 
             //destination is some number type
-            if (!new List<Type>()
+            if(new List<Type>()
             {
                 typeof(DateTime),
                 typeof(TimeSpan),
@@ -56,14 +56,40 @@ namespace SimpleMapper.CopyStrategies
                 typeof(TimeSpan?)
             }.Contains(toProp.PropertyType))
             {
-                ConvertToNumber(tFrom, tTo, toProp, fromProp);
+                //destination type is date or timespan value
+                ConvertToDateOrTimeValue(tFrom, tTo, toProp, fromProp);
+               
+            }
+            else if (toProp.PropertyType.IsEnum)
+            {
+                ConvertToEnum(tFrom, tTo, toProp, fromProp);
+            }
+            else if (fromProp.PropertyType.IsEnum && toProp.PropertyType == typeof(int))
+            {
+                toProp.SetValue(tTo, (int)fromProp.GetValue(tFrom));
+            }
+            else if (fromProp.PropertyType.IsEnum && toProp.PropertyType != typeof(int))
+            {
+                throw new InvalidCastException($"Cannot convert from {tFrom.GetType().Name}.{fromProp.Name} to "
+                    + $"{tTo.GetType().Name}.{toProp.Name}. {tTo.GetType().Name}.{toProp.Name} must be an integer");
             }
             else
             {
-                //destination type is date or timespan value
-                ConvertToDateOrTimeValue(tFrom, tTo, toProp, fromProp);
+                ConvertToNumber(tFrom, tTo, toProp, fromProp);
             }
             
+        }
+      
+
+        private void ConvertToEnum<TOut>(object tFrom, TOut tTo, PropertyInfo toProp, PropertyInfo fromProp)
+        {
+            if (fromProp.PropertyType != typeof(int))
+                throw new InvalidCastException($"Cannot convert from {tFrom.GetType().Name}.{fromProp.Name} to "
+                    + $"{tTo.GetType().Name}.{toProp.Name}. {tFrom.GetType().Name}.{fromProp.Name} must be an integer");
+
+            var fVal = fromProp.GetValue(tFrom);
+            //valid conversion
+            toProp.SetValue(tTo, fVal);
         }
 
 

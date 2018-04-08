@@ -17,5 +17,6 @@ namespace Tests.Models.DefaultCopy
         public DateTime Birthdate { get; set; }
         public TimeSpan TimeSpanAlive { get; set; }
         public bool IsHappy { get; set; }
+        public TestEnum Enum { get; set; }
     }
 }
