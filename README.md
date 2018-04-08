@@ -121,3 +121,7 @@ Now I know what you are thinking.. How do I do more complex mapping? Just implem
 - Changing mechanics for underlying attributes and mapping system
 - Adding `DateTime` and `TimeSpan` to mappable properties
 - Simplifying the `IMappable` interface to take only one generic argument
+
+
+
+[![Build Status](https://travis-ci.org/AaronLenoir/flaclibsharp.svg?branch=master)](https://travis-ci.org/Adrian10988/SimpleMapper)
