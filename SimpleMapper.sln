@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleMapper", "SimpleMapper\SimpleMapper.csproj", "{4D9066B0-5AF2-4D28-A2F0-1C210C7E973A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMapper.Test", "SimpleMapper.Test\SimpleMapper.Test.csproj", "{E5EEB0D3-6E5C-43B1-B48D-68E091E740DA}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{4D9066B0-5AF2-4D28-A2F0-1C210C7E973A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D9066B0-5AF2-4D28-A2F0-1C210C7E973A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D9066B0-5AF2-4D28-A2F0-1C210C7E973A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E5EEB0D3-6E5C-43B1-B48D-68E091E740DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5EEB0D3-6E5C-43B1-B48D-68E091E740DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5EEB0D3-6E5C-43B1-B48D-68E091E740DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5EEB0D3-6E5C-43B1-B48D-68E091E740DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
