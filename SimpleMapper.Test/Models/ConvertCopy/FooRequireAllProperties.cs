@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ShipBob.Mapper.Test.Models.ConvertCopy
 {
-    [ImplicitlyConvertPrimitives]
+    [ImplicitConversionAttribute]
     [RequireAllProperties]
     public class FooRequireAllProperties : BaseMappable<Bar, FooRequireAllProperties>
     {

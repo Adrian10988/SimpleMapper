@@ -105,7 +105,7 @@ namespace SimpleMapper.Test
         }
 
         [TestMethod]
-        public void DefaultCopy_BypassHappyPath()
+        public void DefaultCopy_MapFromAttribute()
         {
             var bar = new Bar()
             {
