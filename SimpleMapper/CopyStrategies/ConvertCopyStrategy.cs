@@ -8,6 +8,7 @@ using System.Text;
 
 namespace SimpleMapper.CopyStrategies
 {
+    //TODO - Class is getting too complex, need to refactor to a more methodical approach. Perhaps another strategy pattern factory -- adrian10988
     public class ConvertCopyStrategy : BaseCopyStrategy, ICopyStrategy
     {
         private readonly IEnumerable<IPropertyLevelRule> _rules;
@@ -45,11 +46,6 @@ namespace SimpleMapper.CopyStrategies
                 return;
             }
 
-            //check if destination is nullable type
-            if (Nullable.GetUnderlyingType(toProp.PropertyType) != null)
-            {
-
-            }
 
             //destination is some number type
             if (!new List<Type>()
