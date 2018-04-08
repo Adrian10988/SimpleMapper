@@ -1,7 +1,7 @@
 language: csharp
 dotnet: 2.0.0
 script:
-   - cd SimpleMapper.Test
+   - cd Tests
    # once test command runs on the above proj, that proj forces build of the main proj since it holds reference to it.
    # there is no need to reference the whole solution
    - dotnet test
