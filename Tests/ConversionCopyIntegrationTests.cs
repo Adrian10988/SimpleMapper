@@ -150,6 +150,8 @@ namespace Tests
             };
 
             var mapSlave = new FooEnumToBool();
+
+            var data = mapSlave.Map(bar);
         }
         public void ConversionCopy_NullableToString_WhenNullableHasValue()
         {
