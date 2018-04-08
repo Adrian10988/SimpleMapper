@@ -1,8 +1,8 @@
 language: csharp
-solution: SimpleMapper.sln
-install:
-  - nuget restore SimpleMapper.sln
-  - nuget install NUnit.Runners -Version 3.8.0 -OutputDirectory testrunner
+dotnet: 2.0.0
 script:
-  - xbuild /p:Configuration=Release SimpleMapper.sln
-  - mono ./testrunner/NUnit.Runners.3.8.0/tools/nunit-console.exe ./SimpleMapper.Test/bin/Release/SimpleMapper.Test.dll
+   - cd SimpleMapper.Test
+   # once test command runs on the above proj, that proj forces build of the main proj since it holds reference to it.
+   # there is no need to reference the whole solution
+   - dotnet test
+   # dotnet test runs: dotnet restore and dotnet build before running tests
