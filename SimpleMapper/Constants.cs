@@ -12,6 +12,7 @@ namespace SimpleMapper
         {
             TypeWhiteList = new List<Type>()
             {
+                typeof(short),
                 typeof(string),
             typeof(int),
             typeof(long),
@@ -20,6 +21,7 @@ namespace SimpleMapper
             typeof(bool),
             typeof(DateTime),
             typeof(TimeSpan),
+            typeof(short?),
             typeof(int?),
             typeof(long?),
             typeof(double?),
