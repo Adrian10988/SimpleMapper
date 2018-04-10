@@ -188,5 +188,63 @@ namespace Tests
             Assert.AreEqual(bar.Age, data.Age);
         }
 
+        [TestMethod]
+        public void DefaultCopy_Short_To_Short()
+        {
+            var bar = new BarShort()
+            {
+                Day = 5
+            };
+
+            var mapSlave = new FooShort();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(bar.Day, data.Day);
+        }
+
+
+        [TestMethod]
+        public void DefaultCopy_Short_To_Short_WithNullableProps()
+        {
+            var bar = new BarShortNullable()
+            {
+                Day = 5
+            };
+
+            var mapSlave = new FooShortNullable();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(bar.Day, data.Day);
+
+            bar.Day = null;
+
+            data = mapSlave.Map(bar);
+
+            Assert.IsNull(data.Day);
+        }
+
+        [TestMethod]
+        public void DefaultCopy_Short_To_Short_WithNullableProps_MapFrom()
+        {
+            var bar = new BarShortMapFrom()
+            {
+                DayNumber = 5
+            };
+
+            var mapSlave = new FooShortMapFrom();
+
+            var data = mapSlave.Map(bar);
+
+            Assert.AreEqual(bar.DayNumber, data.Day);
+
+            bar.DayNumber = null;
+
+            data = mapSlave.Map(bar);
+
+            Assert.IsNull(data.Day);
+        }
+
     }
 }
