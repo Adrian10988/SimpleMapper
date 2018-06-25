@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/AaronLenoir/flaclibsharp.svg?branch=master)](https://travis-ci.org/Adrian10988/SimpleMapper)
 # Version 2.2.0 is here
-*It will be another week or two before the nuget package gets updated*
 
 
 # Quick Start
