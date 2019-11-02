@@ -15,6 +15,9 @@ namespace SimpleMapper
         private static readonly IClassLevelRuleFactory _classLevelRuleFactory;
         private static readonly IClassMappingConfigurationFactory _classMappingConfigFact;
 
+        private static bool _registrationOverridden = false;
+        //TODO
+        //potentially can offer a configuration hook that allows configuration of the static instance -A
 
         static Mapper()
         {
@@ -50,7 +53,7 @@ namespace SimpleMapper
             var destAttrs = typeof(TDestination).GetCustomAttributes(true).ToList();
 
             if (!sourceAttrs.Any(a => a is MapTargetAttribute))
-                throw new InvalidOperationException($"{typeof(TSource)} is not mappable. Please use a `MapFromAttribute` on the source class in order to mark it as a map supported class.");
+                throw new ArgumentException($"{typeof(TSource)} is not mappable. Please use a `MapFromAttribute` on the source class in order to mark it as a map supported class.");
 
             var destinationTargetTypes = ((MapTargetAttribute)sourceAttrs.First(a => a is MapTargetAttribute)).Types;
 
