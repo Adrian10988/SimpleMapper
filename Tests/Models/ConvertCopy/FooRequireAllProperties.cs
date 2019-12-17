@@ -10,7 +10,7 @@ namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversionAttribute]
     [RequireAllProperties]
-    public class FooRequireAllProperties : BaseMappable<Bar, FooRequireAllProperties>
+    public class FooRequireAllProperties
     {
         public string FirstName { get; set; }
         public int Age { get; set; }

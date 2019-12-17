@@ -22,61 +22,74 @@ namespace SimpleMapper.Validation
             _classLevelRuleFactory = new ClassLevelRuleFactory(_getProps);
             _aggregatedExceptions = new List<Exception>();
         }
+
+       
+        public static void ValidateMappings(List<Type> types)
+        {
+            //ValidateMappingsByType(types);
+        }
+
         public static void ValidateMappings(List<Assembly> assemblies)
         {
-           
+            //var types = GetAllMappingTypes(assemblies);
+            //ValidateMappingsByType(types);
+        }
 
-            var types = GetAllMappingTypes(assemblies);
-            var validator = new RuleValidator(new ClassMappingConfigurationFactory(),
-                new ClassLevelRuleFactory(
-                    new GetPublicAndPrivateProperties()));
+        private static void ValidateMappingsByType(List<Type> types)
+        {
+            //var validator = new RuleValidator(new ClassMappingConfigurationFactory(),
+            //   new ClassLevelRuleFactory(
+            //       new GetPublicAndPrivateProperties()));
 
-            foreach(var type in types)
-            {
-                try
-                {
-                    validator.ValidateType(type);
-                }
-                catch(Exception e)
-                {
-                    _aggregatedExceptions.Add(e);
-                }
-                
-            }
+            //foreach (var type in types)
+            //{
+            //    try
+            //    {
+            //        validator.ValidateType(type);
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        _aggregatedExceptions.Add(e);
+            //    }
 
-            if (_aggregatedExceptions.Any())
-            {
-                throw new AggregateException(_aggregatedExceptions);
-            }
+            //}
+
+            //if (_aggregatedExceptions.Any())
+            //{
+            //    throw new AggregateException(_aggregatedExceptions);
+            //}
         }
 
         private static List<Type> GetAllMappingTypes(List<Assembly> assemblies)
         {
-            var allDtos = new List<Type>();
+            //var allDtos = new List<Type>();
 
-            foreach (var a in assemblies)
-            {
-                var types = GetAllTypesThatImplementBaseMappable(a);
+            //foreach (var a in assemblies)
+            //{
+            //    var types = GetAllTypesThatImplementBaseMappable(a);
 
-                foreach (var type in types)
-                {
-                    if (!allDtos.Contains(type))
-                        allDtos.Add(type);
-                }
-            }
-            return allDtos;
+            //    foreach (var type in types)
+            //    {
+            //        if (!allDtos.Contains(type))
+            //            allDtos.Add(type);
+            //    }
+            //}
+            //return allDtos;
+            return null;
         }
 
         private static List<Type> GetAllTypesThatImplementBaseMappable(Assembly assembly)
         {
-            var types = from x in assembly.GetTypes()
-                                        let y = x.BaseType
-                                        where !x.IsAbstract && !x.IsInterface &&
-                                        y != null && y.IsGenericType &&
-                                        y.GetGenericTypeDefinition() == typeof(BaseMappable<,>)
-                                        select x;
+            //var types = from x in assembly.GetTypes()
+            //                            let y = x.BaseType
+            //                            where !x.IsAbstract && !x.IsInterface &&
+            //                            y != null && y.IsGenericType &&
+            //                            y.GetGenericTypeDefinition() == typeof(BaseMappable<,>)
+            //                            select x;
 
-            return types.ToList();
+            //return types.ToList();
+
+            return null;
         }
    
     }

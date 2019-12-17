@@ -26,17 +26,17 @@ namespace SimpleMapper
             _classLevelRuleFactory = new ClassLevelRuleFactory(_getProps);
         }
 
-        public static TDestination Build<TSource, TDestination>(TSource source) where TSource : new() where TDestination: new()
+        public static TDestination Copy<TSource, TDestination>(TSource source) where TSource : new() where TDestination: new()
         {
             ValidateSuppliedMappingTypes<TSource, TDestination>();
 
-            var config = CreateClassMappingConfiguration(source);
+            var config = CreateClassMappingConfiguration<TSource, TDestination>();
             var mapper = CreateClassMapper(source, config);
             return mapper.Map<TSource, TDestination>(config, source);
         }
-        private static ClassMappingConfiguration CreateClassMappingConfiguration<TSource>(TSource source)
+        private static ClassMappingConfiguration CreateClassMappingConfiguration<TSource, TDestination>()
         {
-            return _classMappingConfigFact.Create(source.GetType());
+            return _classMappingConfigFact.Create(typeof(TSource), typeof(TDestination));
         }
         private static IClassMapper CreateClassMapper<TSource>(TSource source, ClassMappingConfiguration config)
         {
@@ -52,10 +52,10 @@ namespace SimpleMapper
             var sourceAttrs = typeof(TSource).GetCustomAttributes(true).ToList();
             var destAttrs = typeof(TDestination).GetCustomAttributes(true).ToList();
 
-            if (!sourceAttrs.Any(a => a is MapTargetAttribute))
+            if (!sourceAttrs.Any(a => a is MapDestinationAttribute))
                 throw new ArgumentException($"{typeof(TSource)} is not mappable. Please use a `MapFromAttribute` on the source class in order to mark it as a map supported class.");
 
-            var destinationTargetTypes = ((MapTargetAttribute)sourceAttrs.First(a => a is MapTargetAttribute)).Types;
+            var destinationTargetTypes = ((MapDestinationAttribute)sourceAttrs.First(a => a is MapDestinationAttribute)).Types;
 
             if (!destinationTargetTypes.Contains(typeof(TDestination)))
                 throw new ArgumentException($"{typeof(TDestination)} is not registered to {typeof(TSource)} and cannot be mapped. Please ensure {typeof(TSource)}'s `MapTargetAttribute` references {typeof(TDestination)}");

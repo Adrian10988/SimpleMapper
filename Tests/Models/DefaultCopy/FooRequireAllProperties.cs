@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace Tests.Models.DefaultCopy
 {
     [RequireAllProperties]
-    public class FooRequireAllProperties : BaseMappable<Bar, FooRequireAllProperties>
+    [MapDestination(typeof(Bar))]
+    public class FooRequireAllProperties
     {
         public string FirstName { get; set; }
         public int Age { get; set; }

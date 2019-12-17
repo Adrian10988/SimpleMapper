@@ -6,15 +6,18 @@ using System.Text;
 namespace SimpleMapper.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class MapTargetAttribute : Attribute
+    public class MapDestinationAttribute : Attribute
     {
         public Type[] Types { get; private set; }
-        public MapTargetAttribute(params Type[] types)
+        public MapDestinationAttribute(params Type[] types)
         {
             Types = types;
             RejectPrimitiveMappings();
         }
 
+        /// <summary>
+        /// Will make sure people do not try to map primitives with this attribute
+        /// </summary>
         private void RejectPrimitiveMappings()
         {
             if (Types.Any(a => Constants.TypeWhiteList.Contains(a)))

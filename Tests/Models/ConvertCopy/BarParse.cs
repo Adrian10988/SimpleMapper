@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleMapper.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tests.Models.ConvertCopy
 {
+    [MapDestination(typeof(FooParse))]
     public class BarParse
     {
         public string FirstName { get; set; }

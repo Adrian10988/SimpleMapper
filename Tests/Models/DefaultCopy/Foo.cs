@@ -1,4 +1,5 @@
 ﻿using SimpleMapper;
+using SimpleMapper.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Tests.Models.DefaultCopy
 {
-    public class Foo : BaseMappable<Bar, Foo>
+    [MapDestination(typeof(Bar))]
+    public class Foo
     {
         public string FirstName { get; set; }
         public int Age { get; set; }

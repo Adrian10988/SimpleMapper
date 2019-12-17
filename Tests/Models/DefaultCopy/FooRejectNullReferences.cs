@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace Tests.Models.DefaultCopy
 {
     [RejectNullReferences]
-    public class FooRejectNullReferences : BaseMappable<Bar, FooRejectNullReferences>
+    [MapDestination(typeof(Bar))]
+    public class FooRejectNullReferences
     {
         [RejectNullReferences]
         public string FirstName { get; set; }

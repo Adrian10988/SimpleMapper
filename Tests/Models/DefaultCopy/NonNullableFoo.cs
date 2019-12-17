@@ -1,11 +1,13 @@
 ﻿using SimpleMapper;
+using SimpleMapper.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Tests.Models.DefaultCopy
 {
-    public class NonNullableFoo : BaseMappable<NullableBar, NonNullableFoo>
+    [MapDestination(typeof(NullableBar))]
+    public class NonNullableFoo
     {
         public string FirstName { get; set; }
         public int Age { get; set; }
