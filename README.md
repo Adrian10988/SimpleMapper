@@ -43,5 +43,22 @@
     }
     
  When performing a call to `Map` on `WildCat` a `MissingMemberException` will be thrown. 
+ 
+ ## Multi-Destination Mappings
+        [MapDestination(typeof(MultiDestinationOne), typeof(MultiDestinationTwo))]
+        private class MultiDestinedSource
+        {
+            public string Name { get; set; } = "Scratchy";
+        }
+
+
+        private class MultiDestinationOne
+        {
+            public string Name { get; set; }
+        }
+        private class MultiDestinationTwo
+        {
+            public string Name { get; set; }
+        }
     
     
