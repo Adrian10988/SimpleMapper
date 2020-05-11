@@ -4,6 +4,7 @@
 
 # Quick Start
 ## Default Mapping
+    [MapDestination(typeof(PendingOrder))]
     public class Order
     {
       public string Id {get; set;}
@@ -11,7 +12,7 @@
       public bool IsGift {get; set;}
     }
 
-    public class PendingOrder : BaseMappable<Order, PendingOrder>
+    public class PendingOrder
     {
       public string Id {get; set;}
       public string Status {get; set;}
@@ -22,14 +23,11 @@
     public void PerformTheMapping()
     {
       var order = _orderRepo.Get("A124B2");
-      var mapSlave = new PendingOrder();
-      //`mappedEntity` is of type `PendingOrder`
-      var mappedEntity = mapSlave.Map(order);
+      var pendingOrder = SimpleMapper.Mapper.Copy<Order, PendingOrder>(order);
     }
-    
-From the above example, we can see that the mapping attributes go on the *result* class and not the *source* class. We can also see that `PendingOrder` contains property: `Status` which `Order` does not. By default, _SimpleMapper_ only maps common properties. This can be overriden with the `RequireAllPropertiesAttribute`. See below for an example
 
 ## Using RequireAllPropertiesAttribute
+    [MapDestination(typeof(WildCat))]
     public class Cat 
     {
       public string Breed {get; set;}
@@ -37,7 +35,7 @@ From the above example, we can see that the mapping attributes go on the *result
     }
 
     [RequireAllProperties]
-    public class WildCat : BaseMappable<Cat, WildCat>
+    public class WildCat
     {
       public string Breed {get; set;}
       public string Weight {get; set;}
