@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Tests.Models.DefaultCopy
 {
-    public class FooMapFrom : BaseMappable<Bar, FooMapFrom>
+    [MapDestination(typeof(Bar))]
+    public class FooMapFrom
     {
         [MapFrom(PropertyName = "FirstName")]
         public string LastName { get; set; }

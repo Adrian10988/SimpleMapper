@@ -7,7 +7,7 @@ using System.Text;
 namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversion]
-    public class NullableFoo : BaseMappable<NullableBar, NullableFoo>
+    public class NullableFoo
     {
         public string FirstName { get; set; }
         public string Age { get; set; }

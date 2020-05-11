@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversionAttribute]
-    public class Foo : BaseMappable<Bar, Foo>
+    public class Foo
     {
         public string FirstName { get; set; }
         public string Age { get; set; }

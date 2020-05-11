@@ -7,7 +7,7 @@ using System.Text;
 namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversion]
-    public class FooIntToDateTime : BaseMappable<BarIntToDateTime, FooIntToDateTime>
+    public class FooIntToDateTime
     {
         public DateTime Property { get; set; }
     }

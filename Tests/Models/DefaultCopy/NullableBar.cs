@@ -1,9 +1,12 @@
-﻿using System;
+﻿using SimpleMapper.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Tests.Models.DefaultCopy
 {
+    [MapDestination(typeof(NullableFoo),
+        typeof(NonNullableFoo))]
     public class NullableBar
     {
         public string FirstName { get; set; }

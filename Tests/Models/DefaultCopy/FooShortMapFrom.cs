@@ -6,7 +6,8 @@ using System.Text;
 
 namespace Tests.Models.DefaultCopy
 {
-    public class FooShortMapFrom : BaseMappable<BarShortMapFrom, FooShortMapFrom>
+    [MapDestination(typeof(BarShortMapFrom))]
+    public class FooShortMapFrom
     {
         [MapFrom(PropertyName ="DayNumber")]
         public short? Day { get; set; }

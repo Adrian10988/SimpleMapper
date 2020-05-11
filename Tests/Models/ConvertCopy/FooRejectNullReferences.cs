@@ -10,7 +10,7 @@ namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversionAttribute]
     [RejectNullReferences]
-    public class FooRejectNullReferences : BaseMappable<Bar, FooRejectNullReferences>
+    public class FooRejectNullReferences
     {
         [RejectNullReferences]
         public string FirstName { get; set; }

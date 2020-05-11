@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleMapper.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Tests.Models.DefaultCopy
 {
+    [MapDestination(typeof(Box), typeof(Foo), typeof(FooRequireAllProperties), typeof(FooMapFrom),
+        typeof(NullableFooToBar), typeof(FooRejectNullReferences))]
     public class Bar
     {
         public string FirstName { get; set; }

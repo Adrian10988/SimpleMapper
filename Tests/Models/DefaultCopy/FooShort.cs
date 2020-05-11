@@ -1,11 +1,13 @@
 ﻿using SimpleMapper;
+using SimpleMapper.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Tests.Models.DefaultCopy
 {
-    public class FooShort : BaseMappable<BarShort, FooShort>
+    [MapDestination(typeof(BarShort))]
+    public class FooShort
     {
         public short Day { get; set; }
     }

@@ -7,7 +7,7 @@ using System.Text;
 namespace Tests.Models.ConvertCopy
 {
     [ImplicitConversion]
-    public class FooEnumToBool : BaseMappable<BarEnumToBool, FooEnumToBool>
+    public class FooEnumToBool
     {
         public bool Enum { get; set; }
     }

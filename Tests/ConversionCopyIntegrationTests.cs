@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tests.Models;
+using SimpleMapper;
 
 namespace Tests
 {
@@ -26,9 +27,7 @@ namespace Tests
                 IsHappy = true,
                 MoneyToTheWallet = "1800.23"
             };
-
-            var mapSlave = new FooParse();
-            var result = mapSlave.Map(barParse);
+            var result = Mapper.Copy<BarParse, FooParse>(barParse);
 
             Assert.AreEqual(result.Age, 29);
             Assert.AreEqual(result.GPA, 3);
@@ -46,7 +45,7 @@ namespace Tests
 
             var mapSlave = new Foo();
 
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<Bar, Foo>(bar);
 
             Assert.IsTrue(data.Age == "10");
         }
@@ -60,9 +59,7 @@ namespace Tests
                 Age = 10
             };
 
-            var mapSlave = new FooMapFrom();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<Bar, FooMapFrom>(bar);
 
             Assert.AreEqual(bar.FirstName, data.LastName);
             Assert.AreEqual(data.Age, "10");
@@ -72,8 +69,7 @@ namespace Tests
         [ExpectedException(typeof(NullReferenceException))]
         public void ConversionCopy_RejectNullReferenceClassLevel()
         {
-            var mapSlave = new FooRejectNullReferences();
-            var data = mapSlave.Map(null);
+            var data = Mapper.Copy<Bar, FooRejectNullReferences>(null);
 
         }
 
@@ -86,8 +82,7 @@ namespace Tests
                 FirstName = null
             };
 
-            var mapSlave = new FooRejectNullReferences();
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<Bar, FooRejectNullReferences>(bar);
         }
 
         [TestMethod]
@@ -106,8 +101,7 @@ namespace Tests
                 TimeSpanAlive = DateTime.Now - new DateTime(1988, 10, 9)
             };
 
-            var mapSlave = new FooRequireAllProperties();
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<Bar, FooRequireAllProperties>(bar);
         }
 
         [TestMethod]
@@ -118,9 +112,7 @@ namespace Tests
                 Enum = Models.TestEnum.One
             };
 
-            var mapSlave = new FooEnumToInt();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarEnumToInt, FooEnumToInt>(bar);
 
             Assert.AreEqual(data.Enum, (int)bar.Enum);
         }
@@ -133,9 +125,7 @@ namespace Tests
                 Enum = 1
             };
 
-            var mapSlave = new FooIntToEnum();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarIntToEnum, FooIntToEnum>(bar);
 
             Assert.AreEqual(data.Enum, (TestEnum)bar.Enum);
         }
@@ -149,9 +139,7 @@ namespace Tests
                 Enum = TestEnum.One
             };
 
-            var mapSlave = new FooEnumToBool();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarEnumToBool, FooEnumToBool>(bar);
         }
         public void ConversionCopy_NullableToString_WhenNullableHasValue()
         {
@@ -161,10 +149,7 @@ namespace Tests
                 FirstName = "John"
             };
 
-
-            var mapSlave = new NullableFoo();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<NullableBar, NullableFoo>(bar);
 
             Assert.AreEqual(bar.FirstName, data.FirstName);
             Assert.AreEqual(data.Age, "10");
@@ -179,10 +164,7 @@ namespace Tests
                 FirstName = "John"
             };
 
-
-            var mapSlave = new NullableFoo();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<NullableBar, NullableFoo>(bar);
 
             Assert.AreEqual(bar.FirstName, data.FirstName);
             Assert.AreEqual(data.Age, bar.Age);
@@ -197,9 +179,7 @@ namespace Tests
                 Property = 1
             };
 
-            var mapSlave = new FooIntToDateTime();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarIntToDateTime, FooIntToDateTime>(bar);
         }
 
         [TestMethod]
@@ -211,9 +191,7 @@ namespace Tests
                 Enum = false
             };
 
-            var mapSlave = new FooBoolToEnum();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarBoolToEnum, FooBoolToEnum>(bar);
         }
         public void ConversionCopy_NullableDate_ToNonNullableDate()
         {
@@ -224,8 +202,7 @@ namespace Tests
                 FirstName = "John"
             };
 
-            var mapSlave = new NonNullableFoo();
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<NullableBar, NonNullableFoo>(bar);
         }
 
         [TestMethod]
@@ -239,8 +216,7 @@ namespace Tests
                 FirstName = "John"
             };
 
-            var mapSlave = new NonNullableFoo();
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<NullableBar, NonNullableFoo>(bar);
         }
     }
 }

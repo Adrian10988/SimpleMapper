@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SimpleMapper;
 using Tests.Models;
 using Tests.Models.DefaultCopy;
 
@@ -26,11 +27,8 @@ namespace Tests
                 Enum = TestEnum.One
             };
 
-            var fooSlave = new Foo();
-            var fooMapResult = fooSlave.Map(bar);
-
-            var boxSlave = new Box();
-            var boxMapResult = boxSlave.Map(bar);
+            var fooMapResult = Mapper.Copy<Bar, Foo>(bar);
+            var boxMapResult = Mapper.Copy<Bar, Box>(bar);
 
             Assert.AreEqual(bar.FirstName, fooMapResult.FirstName);
             Assert.AreEqual(bar.Age, fooMapResult.Age);
@@ -64,8 +62,7 @@ namespace Tests
                 TimeSpanAlive = DateTime.Now - new DateTime(1988, 10, 9)
             };
 
-            var mapSlave = new FooRequireAllProperties();
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<Bar, FooRequireAllProperties>(bar);
         }
 
 
@@ -73,8 +70,7 @@ namespace Tests
         [ExpectedException(typeof(NullReferenceException))]
         public void DefaultCopy_RejectNullReferenceClassLevel()
         {
-            var mapSlave = new FooRejectNullReferences();
-            var data = mapSlave.Map(null);
+            var d = Mapper.Copy<Bar, FooRejectNullReferences>(null);
         }
 
         [TestMethod]
@@ -93,15 +89,13 @@ namespace Tests
                 TimeSpanAlive = DateTime.Now - new DateTime(1988, 10, 9)
             };
 
-            var mapSlave = new FooRejectNullReferences();
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<Bar, FooRejectNullReferences>(bar);
         }
 
         [TestMethod]
         public void DefaultCopy_ReturnNullWhenPassedNullType()
         {
-            var mapSlave = new Foo();
-            var data = mapSlave.Map(null);
+            var data = Mapper.Copy<Foo, Bar>(null);
 
             Assert.IsNull(data);
         }
@@ -121,8 +115,7 @@ namespace Tests
                 TimeSpanAlive = DateTime.Now - new DateTime(1988, 10, 9)
             };
 
-            var mapSlave = new FooMapFrom();
-            var fooMapResult = mapSlave.Map(bar);
+            var fooMapResult = Mapper.Copy<Bar, FooMapFrom>(bar);
 
             Assert.AreEqual(bar.FirstName, fooMapResult.LastName);
             Assert.AreEqual(bar.Age, fooMapResult.Age);
@@ -144,9 +137,7 @@ namespace Tests
                 BirthDate = null
             };
 
-            var mapSlave = new NullableFoo();
-
-            var data = mapSlave.Map(nBar);
+            var data = Mapper.Copy<NullableBar, NullableFoo>(nBar);
 
             Assert.AreEqual(data.FirstName, nBar.FirstName);
             Assert.AreEqual(data.Age, nBar.Age);
@@ -164,9 +155,7 @@ namespace Tests
                 BirthDate = null
             };
 
-            var mapSlave = new NonNullableFoo();
-
-            var data = mapSlave.Map(nBar);
+            var data = Mapper.Copy<NullableBar, NonNullableFoo>(nBar);
         }
 
         [TestMethod]
@@ -179,9 +168,7 @@ namespace Tests
                 Age = 11
             };
 
-            var mapSlave = new NullableFooToBar();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<Bar, NullableFooToBar>(bar);
 
             Assert.AreEqual(bar.FirstName, data.FirstName);
             Assert.IsNotNull(data.Age);
@@ -196,9 +183,7 @@ namespace Tests
                 Day = 5
             };
 
-            var mapSlave = new FooShort();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarShort, FooShort>(bar);
 
             Assert.AreEqual(bar.Day, data.Day);
         }
@@ -212,15 +197,13 @@ namespace Tests
                 Day = 5
             };
 
-            var mapSlave = new FooShortNullable();
-
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarShortNullable, FooShortNullable>(bar);
 
             Assert.AreEqual(bar.Day, data.Day);
 
             bar.Day = null;
 
-            data = mapSlave.Map(bar);
+            data = Mapper.Copy<BarShortNullable, FooShortNullable>(bar);
 
             Assert.IsNull(data.Day);
         }
@@ -235,13 +218,13 @@ namespace Tests
 
             var mapSlave = new FooShortMapFrom();
 
-            var data = mapSlave.Map(bar);
+            var data = Mapper.Copy<BarShortMapFrom, FooShortMapFrom>(bar);
 
             Assert.AreEqual(bar.DayNumber, data.Day);
 
             bar.DayNumber = null;
 
-            data = mapSlave.Map(bar);
+            data = Mapper.Copy<BarShortMapFrom, FooShortMapFrom>(bar);
 
             Assert.IsNull(data.Day);
         }
